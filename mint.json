@@ -1,9 +1,10 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "Aideate API Documentation",
   "logo": {
     "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "light": "/logo/light.svg",
+    "href": "https://aideate.ai/"
   },
   "favicon": "/favicon.svg",
   "colors": {
@@ -15,10 +16,11 @@
       "to": "#07C983"
     }
   },
+  
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:bin@aideate.ai"
     }
   ],
   "topbarCtaButton": {
@@ -33,9 +35,10 @@
   ],
   "anchors": [
     {
-      "name": "Documentation",
+      "name": "API Documentation",
+      "openapi": "/api-reference/openapi.json",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "url": "api-reference"
     },
     {
       "name": "Community",
@@ -77,9 +80,7 @@
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "v5/v5-create-api-key"
       ]
     }
   ],
