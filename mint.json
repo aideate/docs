@@ -23,23 +23,13 @@
       "url": "mailto:bin@aideate.ai"
     }
   ],
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
-  },
   "tabs": [
     {
-      "name": "API Reference",
+      "name": "API Documentation",
       "url": "api-reference"
     }
   ],
   "anchors": [
-    {
-      "name": "API Documentation",
-      "openapi": "/api-reference/openapi.json",
-      "icon": "book-open-cover",
-      "url": "api-reference"
-    },
     {
       "name": "Community",
       "icon": "discord",
@@ -49,6 +39,12 @@
       "name": "Blog",
       "icon": "newspaper",
       "url": "https://mintlify.com/blog"
+    },
+    {
+      "name": "API Documentation",
+      "openapi": "/api-reference/openapi.json",
+      "icon": "book-open-cover",
+      "url": "api-reference"
     }
   ],
   "navigation": [
