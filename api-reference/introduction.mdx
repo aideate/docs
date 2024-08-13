@@ -1,33 +1,44 @@
 ---
-title: 'Welcome to Aideate'
-description: 'Your Plug-n-Play AI persona for your games'
+title: 'Aideate APIs'
+description: 'Explore the full range of capabilities that our APIs offer, and feel free use your API keys to directly test each API'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## API Groups
 
-## Welcome
+There are 4 main API groups that we offer:
+- AI Persona CRUD
+- Room & Chat (Text/Voice in/out, Streaming, System Prompt Message, etc., Memory Management)
+- Voice CRUD & TTS
+- *Tooling & Eval (Coming soon)*
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+<CardGroup cols={2}>
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+  <Card 
+    title="AI Persona CRUD" 
+    icon="person"
+    href="/api-reference">
+  </Card>
+  <Card 
+    title="Room & Chat" 
+    icon="message"
+    href="/api-reference">
+  </Card>
+  <Card 
+    title="Voice CRUD & TTS" 
+    icon="microphone"
+    href="/api-reference">
+  </Card>
+</CardGroup>
 
-## Authentication
+## Authentication & API Keys
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+All API endpoints are authenticated using `x-api-key` in your request header
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+```python
+curl "https://api-parallel.aideate.ai/v5/<api-name>" \
+  -H "Content-Type: application/json" \
+  -H "x-api-key: $AIDEATE_API_KEY" \
+  -d '{
+    ...
+  }'
 ```

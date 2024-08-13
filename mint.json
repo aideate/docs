@@ -19,7 +19,7 @@
   
   "topbarLinks": [
     {
-      "name": "Support",
+      "name": "Contact Team",
       "url": "mailto:bin@aideate.ai"
     }
   ],
@@ -42,8 +42,8 @@
     },
     {
       "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
+      "icon": "discord",
+      "url": "https://discord.gg/dhwWa7FP6h"
     },
     {
       "name": "Blog",
@@ -56,19 +56,8 @@
       "group": "Get Started",
       "pages": [
         "introduction",
-        "quickstart",
-        "development"
-      ]
-    },
-    {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "playground",
+        "development guide"
       ]
     },
     {
@@ -85,8 +74,8 @@
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "x": "https://x.com/liu8in/",
+    "github": "https://github.com/aideate/",
+    "linkedin": "https://www.linkedin.com/company/aideate-ai/"
   }
 }
