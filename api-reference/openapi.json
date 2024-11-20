@@ -1,7 +1,7 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Genova Labs Agent API",
+    "title": "Genova Labs Character API",
     "description": "This is v1 of our API",
     "version": "1.0.0"
   },
