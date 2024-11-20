@@ -123,7 +123,14 @@ This is a SSE (Server-Sent Event) based API, you would POST User's message to th
         }
       }
     ],
-    "stream_text_message": true
+
+    # stream message content back as it's being generated or, 
+    # when false, returned once the entire message is generated
+    "streaming": true, 
+
+    # only used when streaming == true, 
+    # determine if streaming back only delta or the entirety of generated message thus far
+    "streaming_delta": false
   }'
   ```
 </CodeGroup>
