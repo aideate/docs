@@ -1,39 +1,22 @@
 ---
-title: Introduction to Aideate API
-description: 'The Plug-n-Play API for AI personas in your Games & Apps'
+title: Agent API
+description: 'The Plug-n-Play API for AI NPCs / Players / Assistants in your Games & Apps'
 ---
 
-## No-code Playground
+## Overview
 
-Log into our AI Persona Builder and Playground to generate your API Keys and create test characters!
+Our Agent API allows you to build AI NPCs, Assistants, Friends within your own Games or Apps. An Agent can be defined by its own system prompts as well as a set of other core functions you might want it to leverage: voice, actions, knowledge and more.
 
-<CardGroup cols={2}>
-  <Card
-    title="AI Playground"
-    icon="pen-to-square"
-    href="/playground-guide"
-  >
-    Your all-in-one no-code environment to develop your AI personas
-  </Card>
-</CardGroup>
+You can explore the capabilities of our Agents using our AI Playground tool or by building one with the 4-step Devs Quickstart Guide.
 
-## Hook up AI personas into your Games & Apps
+## How Agents Work
 
-Only a few API calls are needed to start having AI personas
+### Important Terms:
 
-<CardGroup cols={2}>
-  <Card
-    title="Step-by-Step Guide"
-    icon="screwdriver-wrench"
-    href="/quickstart-guide"
-  >
-    Follow our step-by-step guide to integrate AI Personas into your code with east
-  </Card>
-  <Card
-    title="Reference APIs"
-    icon="code"
-    href="/api-reference"
-  >
-    Learn the full spectrum of capabilities that we offer through our APIs
-  </Card>
-</CardGroup>
+**Agent:**	Purpose-built AI, powered by our models and systems, customized & tuned by developers.
+
+**Room:**	A conversation session between Agent(s) and User(s). *Rooms* store *Messages* and automatically handle truncation to fit content into a model’s context.
+
+**Message:**	A message created by an Agent or a User. Messages stored as a list in the Room.
+
+**User:** Primarily just a String-typed ID that represents a distinct user  

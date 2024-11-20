@@ -1,10 +1,10 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Aideate API Documentation",
+  "name": "Genova Labs Bot API Documentation",
   "logo": {
     "dark": "/logo/aideate-logo-light.png",
     "light": "/logo/aideate-logo-light.png",
-    "href": "https://aideate.ai/"
+    "href": "https://genova.gg/"
   },
   "favicon": "/favicon.svg",
   "colors": {
@@ -20,9 +20,12 @@
   "topbarLinks": [
     {
       "name": "Contact Team",
-      "url": "mailto:bin@aideate.ai"
+      "url": "mailto:team@genova.gg"
     }
   ],
+  "primaryTab": {
+    "name": "Docs"
+  },
   "tabs": [
     {
       "name": "API References",
@@ -33,12 +36,7 @@
     {
       "name": "Community",
       "icon": "discord",
-      "url": "https://discord.gg/dhwWa7FP6h"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "url": "https://discord.gg/bmRZWyRHh7"
     },
     {
       "name": "API References",
@@ -53,13 +51,7 @@
       "pages": [
         "introduction",
         "quickstart-guide",
-        "playground-guide"
-      ]
-    },
-    {
-      "group": "API References",
-      "pages": [
-        "api-reference/introduction"
+        "api-deepdive"
       ]
     }
   ],
