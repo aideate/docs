@@ -2,8 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Genova Labs Bot API Documentation",
   "logo": {
-    "dark": "/logo/aideate-logo-light.png",
-    "light": "/logo/aideate-logo-light.png",
+    "dark": "/logo/text-only-white-logo.png",
+    "light": "/logo/text-only-black-logo.png",
     "href": "https://genova.gg/"
   },
   "favicon": "/favicon.svg",
