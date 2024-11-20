@@ -98,7 +98,7 @@ A Room represents a conversation session between User(s) and one or many Charact
   ```
 </CodeGroup>
 
-### Step 4: Start Chatting
+### Step 3: Start Chatting
 
 Once you obtain a room\_id Step 3, use that and get your AI Characters to respond or generate messages by calling our conversation-v3 API.
 
@@ -135,12 +135,10 @@ This is a SSE (Server-Sent Event) based API, you would POST User's message to th
   ```
 </CodeGroup>
 
-### Viola! Your App is chatting with your Character(s)
-
-Process your Characters' replies
+### Step 4: Process your Characters' response events
 
 <CodeGroup>
-  ```json with streaming
+  ```json Streaming Responses
   //First Event Back with partial sentence
   {
     "event": "[message]",
@@ -199,6 +197,8 @@ Process your Characters' replies
 <Tip>
   Learn more about SSE: `https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events`
 </Tip>
+
+### Viola! Your App is chatting with your Character(s)
 
 ## Next steps
 
