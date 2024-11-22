@@ -1,26 +1,26 @@
 ---
 title: Intro to Character API
-description: 'The Plug-n-Play API for AI NPCs / Players / Assistants in your Games & Apps'
+description: 'The Plug-n-Play API for AI NPCs / Assistants / Teammates in your Games & Apps'
 ---
 
 ## Overview
 
-Our Character API allows you to build AI NPCs, Assistants, Friends within your own Games or Apps. A Character can be defined by its own system prompts as well as a set of other core functions you might want it to leverage: voice, actions, knowledge and more.
+Our Character API allows you to build AI NPCs, assistants, or teammates within your own games and apps. A Character is defined by its own system prompt as well as other core functions you could leverage: Actions and Voices (beta).
 
-You can explore the capabilities of our Characters using our [AI Playground](https://playground.genova.gg/) tool or by building one with the [4-step Devs Quickstart Guide](/quickstart-guide).
+You can explore the capabilities of our Characters using the [Genova Labs Playground](https://playground.genova.gg/). If you're looking for a quick setup, check out our [4-step Quickstart Guide](/quickstart-guide) to get started!
 
 ## How Characters Work
 
-An simplified diagram of how components work together behind the Character APIs
+Here's a simplified diagram of how components work together behind the Character APIs
 
 ![](images/api-overview-diagram.png)
 
-### Important Terms:
+### Important Terms
 
 **Character:**	Purpose-built AI, powered by our models and systems, customized & tuned by developers.
 
-**Room:**	A conversation session between Character(s) and User(s). *Rooms* store *Messages* and automatically handle truncation to fit content into a model’s context.
+**User:** Non-AI participant in the conversation, primarily represented by a string ID that maps to a distinct *User*.
 
-**Message:**	A message created by a Character or a User. Messages stored as a list in the Room.
+**Room:**	A conversation session between *Character(s)* and *User(s)*. *Rooms* store *Messages* and automatically handle truncation to fit content into a model’s context.
 
-**User:** Primarily just a String-typed ID that represents a distinct user
+**Message:**	A message from a *User* or a *Character* in a conversation. *Messages* are stored as a list in the *Room*.

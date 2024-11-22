@@ -1,207 +1,217 @@
 ---
-title: 'Devs Quickstart Guide'
-description: 'Start building awesome AI Characters / Agents for your games in under 5 minutes'
+title: 'Quickstart Guide'
+description: 'Start building awesome AI Characters for your game in under 5 minutes'
 ---
 
 <Info>
-  **Prerequisite** You should have gotten access to our AI Playground. Otherwise, please email team@genova.gg for access.
+  **Prerequisite** You should have gotten access to the Genova Labs Playground. 
+  
+  To use Genova Labs Playground, you must be invited to join a team first.
+  If you haven't, please contact your team admin for access,
+  
+  Still having issues? Email us at team@genova.gg for support.
 </Info>
 
-### Step 0. Get your API Key
+## Step 1. Get your API Key
 
-Follow this link: [`https://playground.genova.gg/team/api-keys`](https://playground.genova.gg/team/api-keys)
+Open your team's API Keys dashboard: [`https://playground.genova.gg/team/api-keys`](https://playground.genova.gg/team/api-keys)
 
-You should see a **\[Create new API key]** Button, click on that to create your API Key, remember to copy it and store it in a safe place (e.g. in your code)
+Click on the **\[Generate new API key]** button to generate your API key. Remember to copy and store it in a safe place! 
+You'll need it in later steps.
 
-### Step 1. Create a new Character and obtain a Character ID
+## Step 2. Create a new Character
 
-The easiest way is to create & edit a Character using our Playground Tools:
-[`https://playground.genova.gg/character`](https://playground.genova.gg/character)
+You can create and edit Characters on the Playground. Go to the Characters page on Playground:
+[`https://playground.genova.gg/characters`](https://playground.genova.gg/characters).
 
-Use the **\[Create Character]** Button to start building, as an example, we will build a "Simple Robot" together: In the Character Creation Tool, fill in the name, `Simple Robot`, and description, `Use no more than 5 words in each of your reply`. And done, you've got a Simple Robot to start talking to!
+Click on the **\[Create Character]** button to open the creation tool and start building your Character! 
 
-![](images/simple_bot_rep_card.png)
+For now, let's build a "Cat Robot" together. In the Character creation tool:
+1. Upload any photo for the avatar
+2. Enter name: `Cat Robot`
+3. Enter description: `I always start and end my sentences with meows`
+4. Click the **\[Create your new Character]** button
 
-**- OR -** &#x20;
+Woo, you just created your first Character 🎉 <br/>
+Take a note of the Character ID. You'll need it in the next step!
 
-**You can create & update your characters by directly hitting our API:**
+![](images/cat_robot_profile.png)
 
-<CodeGroup>
-  ```bash curl
-  curl --request POST \
-    --url https://api.genova.gg/v1/bots \
-    --header 'Content-Type: application/json' \
-    --header 'x-api-key: <x-api-key>' \
-    --data '{
-      "name": "Simple Robot",
-      "description": "Use no more than 5 words in each of your reply."
-    }'
-  ```
+## Step 3: Create a Room with your Character
 
-  ```json All parameters
-  {
-    "name": "string", // required
-    "user_name": "string",
-    "description": "string", // required
-    "photo": "string",
-    "greeting": "string",
-    "tags": [
-      "string"
-    ],
-    "voice_id": "string",
-    "bot_actions": [
-      {
-        "name": "string",
-        "prompt": "string",
-        "bot_id": "string"
-      }
-    ]
-  }
-  ```
-</CodeGroup>
+A Room represents a conversation session between User(s) and one or many Characters. You should create a new Room whenever you want User(s) to start a fresh conversation with your Character(s). You can reuse an existing Room if your want your Character(s) to have memory of the conversation history that has taken place in the Room.
 
-Obtain the ID of your newly created Character and let's move on to Step 2.
+For this tutorial, let's create a new Room with just one Character, our "Cat Robot". You have 2 options for creating a new Room, through the Playground or through our API.
 
-### Step 2: Create a Room with your Character(s)
+### Option 1: Create a Room on Playground
 
-A Room represents a conversation session between User(s) and one or many Characters. You should create a Room whenever a User (or your AI application) starts a fresh conversation with your Character. Reuse old rooms when your want your Character to have memory of the conversation history (more on Memory later in the Deep Dive section).
+Go to the Characters page on Playground:
+[`https://playground.genova.gg/characters`](https://playground.genova.gg/characters).
+
+Click on the **\[Create Character]** button to open the creation tool. Add the Character ID from Step 1, then click the **\[Save]** button.
+
+Take a note of the Room ID. You’ll need it in the next step!
+
+![](images/cat_robot_room.png)
+
+### Option 2: Create a Room via API endpoint
+
+You can create a Room by making a POST request to our Rooms API endpoint, using your API key from Step 0 and the Character ID from Step 1.
 
 <CodeGroup>
-  ```bash curl request
+  ```bash Example Request
   curl --request POST \
     --url https://api.genova.gg/v1/rooms \
     --header 'Content-Type: application/json' \
-    --header 'x-api-key: <x-api-key>' \
+    --header 'x-api-key: <Your API key from Step 0>' \
     --data '{
-      "bot_ids": [
-        "<id_of_Simple_Robot>"
-      ],
+      "character_ids": [
+        "<Cat Robot's Character ID from Step 1>"
+      ]
     }'
   ```
-
-  ```json response data
+</CodeGroup>
+<CodeGroup>
+  ```json Example Response
   {
-    "id": "string",
-    "participants":
-    [
-      {
-        "id": "string",
-        "bot_id": "id_of_Simple_Robot",
-        "bot_name": "Simple Robot",
-      ...
-      }
-    ],
-    "description": "A chat between user and Simple Robot",
+    "id": "abcxyz",
     "created_at": "2024-11-20T14:15:22Z",
-    ...
   }
   ```
 </CodeGroup>
 
-### Step 3: Start Chatting
+Take a note of the Room ID, which is returned in the `id` field of the response. You’ll need it in the next step!
 
-Once you obtain a room\_id Step 3, use that and get your AI Characters to respond or generate messages by calling our conversation-v3 API.
+## Step 4: Start chatting with your Character
 
-This is a SSE (Server-Sent Event) based API, you would POST User's message to the room and listen for responses.
+In a Room, you can send Messages to your Characters and have your Characters generate Messages in response. 
+You can do so by calling our Messages API endpoint for easy integration with your game.
+
+Our Messages endpoint uses the SSE (Server-Sent Event) protocol. 
+You would make a POST request to send a Message to the Room, then listen for server events to get a Message back from your Character.
+
+<Tip>
+  Learn more about SSE: 
+  [https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events)
+</Tip>
+
+Let's try chatting with our "Cat Robot" by calling the Messages endpoint. You'll need the API key from Step 0 and the Room ID from Step 2.
 
 <CodeGroup>
-  ```bash curl POST message
+  ```bash Example Request
   curl --request POST \
-    --url https://api-parallel.aideate.ai/v5/rooms/{room_id}/conversation-v3 \
+    --url https://api.genova.gg/v1/rooms/<ROOM_ID>/messages \
     --header 'Content-Type: application/json' \
-    --header 'x-api-key: <x-api-key>' \
+    --header 'x-api-key: <Your API key from Step 0>' \
     --data '{
     "sender": {
-      "name": "<string>",
-      "user_id": "<string>",
+      "name": "Jane",
+      "user_id": "jane123"
     },
     "contents": [
       {
         "text": 
         {
-          "message": "Tell me a joke"
+          "message": "Tell me a joke!"
         }
       }
     ],
 
-    # stream message content back as it's being generated or, 
-    # when false, returned once the entire message is generated
-    "streaming": true, 
+    # if streaming is true, stream message content back as it's being generated
+    # else, return message content once the entire message is generated
+    "streaming": true,
 
-    # only used when streaming == true, 
-    # determine if streaming back only delta or the entirety of generated message thus far
+    # streaming_delta is only used when streaming is true
+    # if streaming_delta is true, return only the delta 
+    # (i.e. content that was generated since the last stream back)
+    # else, return the entirety of the content generated so far
     "streaming_delta": false
   }'
   ```
 </CodeGroup>
 
-### Step 4: Process your Characters' response events
-
 <CodeGroup>
-  ```json Streaming Responses
-  //First Event Back with partial sentence
+  ```json Example Streaming Responses
+  // First message event with a partial sentence
   {
     "event": "[message]",
     "data": {
-      "id": "string",
+      "id": "cm3tau5o000p709pgst1kczd4",
       "created_at": "2024-08-21T03:19:21.202616Z",
-      "parent_message_id": "cm03ab0m300036fpbtdmijg33",
       "sender": {
-        "user_id": "string",
-        "name": "string"
+        "character_id": "cm3ta6pe700cp09pgt7j86sng",
+        "name": "Cat Robot"
       },
-      "room_id": "cm02z1bua0000grpbysx0zgmw",
+      "room_id": "cm3tahh0y00a90apgbk4bh8ua",
       "contents": [
         {
           "text": {
-            "message": "fine"
+            "message": "Meow"
           }
         }
       ],
-      "token_usage": null
+      ...
     }
-  },
+  }
 
-  //Second Event Back with remainder of the sentence
+  // Second message event with a longer partial sentence
   {
     "event": "[message]",
     "data": {
-      "id": "string",
+      "id": "cm3tau5o000p709pgst1kczd4",
       "created_at": "2024-08-21T03:19:21.202616Z",
-      "parent_message_id": "cm03ab0m300036fpbtdmijg33",
       "sender": {
-        "user_id": "string",
-        "name": "string"
+        "character_id": "cm3ta6pe700cp09pgt7j86sng",
+        "name": "Cat Robot"
       },
-      "room_id": "cm02z1bua0000grpbysx0zgmw",
+      "room_id": "cm3tahh0y00a90apgbk4bh8ua",
       "contents": [
         {
           "text": {
-            "message": "fine, why reboot myself daily"
+            "message": "Meow why"
           }
         }
       ],
-      "token_usage": null
+      ...
     }
-  },
+  }
 
-  //Done Event Back indicating completion
+  // More message events with partial sentences...
+
+  // Last message event with the full sentence
+  {
+    "event": "[message]",
+    "data": {
+      "id": "cm3tau5o000p709pgst1kczd4",
+      "created_at": "2024-08-21T03:19:21.202616Z",
+      "sender": {
+        "character_id": "cm3ta6pe700cp09pgt7j86sng",
+        "name": "Cat Robot"
+      },
+      "room_id": "cm3tahh0y00a90apgbk4bh8ua",
+      "contents": [
+        {
+          "text": {
+            "message": "Meow why cat join band? Because wanted be purr-cussionist! Meow!"
+          }
+        }
+      ],
+      ...
+    }
+  }
+
+  // Finally, done event indicating completion
   {
     "event": "[done]",
     "data": null
   }
-
   ```
 </CodeGroup>
 
-<Tip>
-  Learn more about SSE: `https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events`
-</Tip>
-
-### Viola! Your App is chatting with your Character(s)
+Voila! Now you've got an AI Character that you can chat with via simple API calls 🙌
 
 ## Next steps
 
-* Continue learning about Character capabilities and concepts in the Deep Dive section
+* Learn more about Character capabilities and concepts in next sections
 
-* Explore the AI Playground: [`https://playground.genova.gg/`](https://playground.genova.gg/)
+* Explore the Genova Labs Playground: [`https://playground.genova.gg/`](https://playground.genova.gg/)
