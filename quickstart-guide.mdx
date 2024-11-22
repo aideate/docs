@@ -105,8 +105,8 @@ Let's try chatting with our "Cat Robot" by calling the Messages endpoint. You'll
     --header 'x-api-key: <Your API key from Step 0>' \
     --data '{
     "sender": {
-      "name": "Jane",
-      "user_id": "jane123"
+      "name": "Jane", # User's name
+      "client_user_id": "jane123" # Any string ID that is unique to this User
     },
     "contents": [
       {
@@ -142,9 +142,9 @@ Let's try chatting with our "Cat Robot" by calling the Messages endpoint. You'll
         "character_id": "cm3ta6pe700cp09pgt7j86sng",
         "name": "Cat Robot"
       },
-      "room_id": "cm3tahh0y00a90apgbk4bh8ua",
       "contents": [
         {
+          "streaming_status": "PROCESSING",
           "text": {
             "message": "Meow"
           }
@@ -164,9 +164,9 @@ Let's try chatting with our "Cat Robot" by calling the Messages endpoint. You'll
         "character_id": "cm3ta6pe700cp09pgt7j86sng",
         "name": "Cat Robot"
       },
-      "room_id": "cm3tahh0y00a90apgbk4bh8ua",
       "contents": [
         {
+          "streaming_status": "PROCESSING",
           "text": {
             "message": "Meow why"
           }
@@ -188,9 +188,9 @@ Let's try chatting with our "Cat Robot" by calling the Messages endpoint. You'll
         "character_id": "cm3ta6pe700cp09pgt7j86sng",
         "name": "Cat Robot"
       },
-      "room_id": "cm3tahh0y00a90apgbk4bh8ua",
       "contents": [
         {
+          "streaming_status": "DONE",
           "text": {
             "message": "Meow why cat join band? Because wanted be purr-cussionist! Meow!"
           }
