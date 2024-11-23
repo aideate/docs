@@ -16,7 +16,6 @@
       "to": "#07C983"
     }
   },
-  
   "topbarLinks": [
     {
       "name": "Contact Team",
@@ -62,5 +61,8 @@
     "x": "https://x.com/liu8in/",
     "github": "https://github.com/aideate/",
     "linkedin": "https://www.linkedin.com/company/aideate-ai/"
+  },
+  "api": {
+    "baseUrl": "https://api.genova.gg/"
   }
 }

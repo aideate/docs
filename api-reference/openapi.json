@@ -1,442 +1,11 @@
 {
   "openapi": "3.1.0",
   "info": {
-    "title": "Genova Labs Developer API",
-    "description": "This is v1 of our API",
+    "title": "Genova.gg v1 API",
+    "description": "This is Genova.gg v1 API",
     "version": "1.0.0"
   },
   "paths": {
-    "/v1/bots": {
-      "post": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Create Bot",
-        "operationId": "v1_create_bot_v1_bots_post",
-        "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/BotCreate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/data__v1_schemas__Bot"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/bots/me": {
-      "get": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Get My Bots",
-        "operationId": "v1_get_my_bots_v1_bots_me_get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "description": "Page number",
-              "default": 1,
-              "title": "Page"
-            },
-            "description": "Page number"
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "description": "Page size",
-              "default": 50,
-              "title": "Size"
-            },
-            "description": "Page size"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Page_Bot_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/bots/partner": {
-      "get": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Get Partner Bots",
-        "operationId": "v1_get_partner_bots_v1_bots_partner_get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "filter_private_bot",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "boolean",
-              "default": true,
-              "title": "Filter Private Bot"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "description": "Page number",
-              "default": 1,
-              "title": "Page"
-            },
-            "description": "Page number"
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "description": "Page size",
-              "default": 50,
-              "title": "Size"
-            },
-            "description": "Page size"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Page_Bot_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/bots/{bot_id}": {
-      "get": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Get One Bot",
-        "operationId": "v1_get_one_bot_v1_bots__bot_id__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "bot_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Bot Id"
-            }
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/data__v1_schemas__Bot"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/bots/{bot_id}/delete": {
-      "post": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Delete Bot",
-        "operationId": "v1_delete_bot_v1_bots__bot_id__delete_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "bot_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Bot Id"
-            }
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean",
-                  "title": "Response V1 Delete Bot V1 Bots  Bot Id  Delete Post"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/bots/{bot_id}/setting": {
-      "post": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Update Bot Settings",
-        "operationId": "v1_update_bot_settings_v1_bots__bot_id__setting_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "bot_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Bot Id"
-            }
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateBot"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/data__v1_schemas__Bot"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/v1/rooms": {
       "post": {
         "tags": [
@@ -444,25 +13,13 @@
         ],
         "summary": "V1 Create Room",
         "operationId": "v1_create_room_v1_rooms_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
         "parameters": [
           {
             "name": "x-api-key",
             "in": "header",
-            "required": false,
+            "required": true,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "X-Api-Key"
             }
           }
@@ -472,7 +29,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/RoomCreate"
+                "$ref": "#/components/schemas/data__v1_schemas__RoomCreate"
               }
             }
           }
@@ -501,81 +58,13 @@
         }
       }
     },
-    "/v1/rooms/{room_id}": {
+    "/v1/rooms/{room_id}/messages": {
       "get": {
         "tags": [
           "v1"
         ],
-        "summary": "V1 Get Room",
-        "operationId": "v1_get_room_v1_rooms__room_id__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "room_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Room Id"
-            }
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/data__v1_schemas__Room"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/rooms/{room_id}/conversation-v3": {
-      "get": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Get Bot Conversation V3",
-        "operationId": "v1_get_bot_conversation_v3_v1_rooms__room_id__conversation_v3_get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
+        "summary": "V1 Get Room Messages",
+        "operationId": "v1_get_room_messages_v1_rooms__room_id__messages_get",
         "parameters": [
           {
             "name": "room_id",
@@ -626,16 +115,9 @@
           {
             "name": "x-api-key",
             "in": "header",
-            "required": false,
+            "required": true,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "X-Api-Key"
             }
           }
@@ -667,13 +149,8 @@
         "tags": [
           "v1"
         ],
-        "summary": "V1 Post Bot Conversation V3",
-        "operationId": "v1_post_bot_conversation_v3_v1_rooms__room_id__conversation_v3_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
+        "summary": "V1 Post Room Messages",
+        "operationId": "v1_post_room_messages_v1_rooms__room_id__messages_post",
         "parameters": [
           {
             "name": "room_id",
@@ -687,16 +164,9 @@
           {
             "name": "x-api-key",
             "in": "header",
-            "required": false,
+            "required": true,
             "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
+              "type": "string",
               "title": "X-Api-Key"
             }
           }
@@ -717,730 +187,6 @@
             "content": {
               "application/json": {
                 "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/rooms/bot/{bot_id}": {
-      "get": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "Get Rooms By Bot Id",
-        "operationId": "get_rooms_by_bot_id_v1_rooms_bot__bot_id__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "bot_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Bot Id"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "description": "Page number",
-              "default": 1,
-              "title": "Page"
-            },
-            "description": "Page number"
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "description": "Page size",
-              "default": 50,
-              "title": "Size"
-            },
-            "description": "Page size"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Page_Room_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/rooms/{room_id}/messages/{message_id}/regen": {
-      "post": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Message Regen",
-        "operationId": "v1_message_regen_v1_rooms__room_id__messages__message_id__regen_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "room_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Room Id"
-            }
-          },
-          {
-            "name": "message_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Message Id"
-            }
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MessageRegen"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {}
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/uploadaudio": {
-      "post": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Upload Audio",
-        "operationId": "v1_upload_audio_v1_uploadaudio_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "$ref": "#/components/schemas/Body_v1_upload_audio_v1_uploadaudio_post"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AudioResponse"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/voices": {
-      "post": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Create Voice",
-        "operationId": "v1_create_voice_v1_voices_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VoiceCreate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Voice"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/voices/{voice_id}/update": {
-      "post": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Update Voice",
-        "operationId": "v1_update_voice_v1_voices__voice_id__update_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "voice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Voice Id"
-            }
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VoiceUpdate"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Voice"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/voices/me": {
-      "get": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Get My Voices",
-        "operationId": "v1_get_my_voices_v1_voices_me_get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "description": "Page number",
-              "default": 1,
-              "title": "Page"
-            },
-            "description": "Page number"
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "description": "Page size",
-              "default": 50,
-              "title": "Size"
-            },
-            "description": "Page size"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Page_Voice_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/voices/partner": {
-      "get": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Get Partner Voices",
-        "operationId": "v1_get_partner_voices_v1_voices_partner_get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "page",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "minimum": 1,
-              "description": "Page number",
-              "default": 1,
-              "title": "Page"
-            },
-            "description": "Page number"
-          },
-          {
-            "name": "size",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "integer",
-              "maximum": 100,
-              "minimum": 1,
-              "description": "Page size",
-              "default": 50,
-              "title": "Size"
-            },
-            "description": "Page size"
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Page_Voice_"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/voices/sample_text_to_voice": {
-      "post": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Sample Text To Voice",
-        "operationId": "v1_sample_text_to_voice_v1_voices_sample_text_to_voice_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/IntroTextToVoice"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/IntroVoice"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/voices/{voice_id}": {
-      "get": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Get Voice By Id",
-        "operationId": "v1_get_voice_by_id_v1_voices__voice_id__get",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "voice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Voice Id"
-            }
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Voice"
-                }
-              }
-            }
-          },
-          "422": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/HTTPValidationError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/v1/voices/{voice_id}/delete": {
-      "post": {
-        "tags": [
-          "v1"
-        ],
-        "summary": "V1 Delete Voice",
-        "operationId": "v1_delete_voice_v1_voices__voice_id__delete_post",
-        "security": [
-          {
-            "HTTPBearer": []
-          }
-        ],
-        "parameters": [
-          {
-            "name": "voice_id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "title": "Voice Id"
-            }
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "schema": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "null"
-                }
-              ],
-              "title": "X-Api-Key"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "boolean",
-                  "title": "Response V1 Delete Voice V1 Voices  Voice Id  Delete Post"
-                }
               }
             }
           },
@@ -1810,7 +556,7 @@
             "anyOf": [
               {
                 "items": {
-                  "$ref": "#/components/schemas/data__v1_schemas__Message"
+                  "$ref": "#/components/schemas/data__internal_schemas__Message"
                 },
                 "type": "array"
               },
@@ -1950,7 +696,7 @@
         ],
         "title": "Body_upload_file_internal_knowledges__knowledge_id__files_post"
       },
-      "Body_v1_upload_audio_v1_uploadaudio_post": {
+      "Body_v1_upload_audio_internal_uploadaudio_post": {
         "properties": {
           "audio": {
             "type": "string",
@@ -1962,7 +708,7 @@
         "required": [
           "audio"
         ],
-        "title": "Body_v1_upload_audio_v1_uploadaudio_post"
+        "title": "Body_v1_upload_audio_internal_uploadaudio_post"
       },
       "BotAction-Input": {
         "properties": {
@@ -2223,6 +969,35 @@
         ],
         "title": "BotCreate"
       },
+      "BotCreatorUser": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "username": {
+            "type": "string",
+            "title": "Username"
+          },
+          "picture": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Picture"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "username"
+        ],
+        "title": "BotCreatorUser"
+      },
       "BotUpsert": {
         "properties": {
           "name": {
@@ -2418,6 +1193,19 @@
           "correct"
         ],
         "title": "EvalActionMessageLabel"
+      },
+      "FeatureAccessRequest": {
+        "properties": {
+          "feature_name": {
+            "type": "string",
+            "title": "Feature Name"
+          }
+        },
+        "type": "object",
+        "required": [
+          "feature_name"
+        ],
+        "title": "FeatureAccessRequest"
       },
       "FileContent-Input": {
         "properties": {
@@ -3029,7 +1817,7 @@
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/data__v1_schemas__Bot"
+              "$ref": "#/components/schemas/data__internal_schemas__Bot"
             },
             "type": "array",
             "title": "Items"
@@ -3230,7 +2018,7 @@
         "properties": {
           "items": {
             "items": {
-              "$ref": "#/components/schemas/data__v1_schemas__Room"
+              "$ref": "#/components/schemas/data__internal_schemas__Room"
             },
             "type": "array",
             "title": "Items"
@@ -3430,47 +2218,6 @@
         ],
         "title": "PartnerMemberInvite"
       },
-      "RoomCreate": {
-        "properties": {
-          "bot_ids": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Bot Ids"
-          },
-          "client_user_ids": {
-            "anyOf": [
-              {
-                "items": {
-                  "type": "string"
-                },
-                "type": "array"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Client User Ids"
-          },
-          "description": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "null"
-              }
-            ],
-            "title": "Description"
-          }
-        },
-        "type": "object",
-        "required": [
-          "bot_ids"
-        ],
-        "title": "RoomCreate"
-      },
       "TextLabelCreate": {
         "properties": {
           "content_index": {
@@ -3649,6 +2396,9 @@
           "requester_user_id": {
             "type": "string",
             "title": "Requester User Id"
+          },
+          "partner": {
+            "$ref": "#/components/schemas/Partner"
           }
         },
         "type": "object",
@@ -3656,7 +2406,8 @@
           "id",
           "email",
           "access_role",
-          "requester_user_id"
+          "requester_user_id",
+          "partner"
         ],
         "title": "UserAccessRequest"
       },
@@ -4508,7 +3259,7 @@
         ],
         "title": "Room"
       },
-      "data__v1_schemas__Bot": {
+      "data__internal_schemas__Bot": {
         "properties": {
           "model_name": {
             "type": "string",
@@ -4522,6 +3273,9 @@
             "type": "string",
             "format": "date-time",
             "title": "Created At"
+          },
+          "creator": {
+            "$ref": "#/components/schemas/BotCreatorUser"
           },
           "private": {
             "type": "boolean",
@@ -4579,7 +3333,7 @@
             "anyOf": [
               {
                 "items": {
-                  "$ref": "#/components/schemas/data__v1_schemas__BotAction"
+                  "$ref": "#/components/schemas/data__internal_schemas__BotAction"
                 },
                 "type": "array"
               },
@@ -4604,6 +3358,7 @@
         "required": [
           "id",
           "created_at",
+          "creator",
           "private",
           "deleted",
           "name",
@@ -4612,7 +3367,7 @@
         ],
         "title": "Bot"
       },
-      "data__v1_schemas__BotAction": {
+      "data__internal_schemas__BotAction": {
         "properties": {
           "id": {
             "type": "string",
@@ -4662,7 +3417,7 @@
         ],
         "title": "BotAction"
       },
-      "data__v1_schemas__Message": {
+      "data__internal_schemas__Message": {
         "properties": {
           "id": {
             "type": "string",
@@ -4685,13 +3440,13 @@
             "title": "Parent Message Id"
           },
           "sender": {
-            "$ref": "#/components/schemas/data__v1_schemas__MessageSender"
+            "$ref": "#/components/schemas/data__internal_schemas__MessageSender"
           },
           "recipients": {
             "anyOf": [
               {
                 "items": {
-                  "$ref": "#/components/schemas/data__v1_schemas__MessageRecipient"
+                  "$ref": "#/components/schemas/data__internal_schemas__MessageRecipient"
                 },
                 "type": "array"
               },
@@ -4704,7 +3459,7 @@
           "replier": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/data__v1_schemas__MessageReplier"
+                "$ref": "#/components/schemas/data__internal_schemas__MessageReplier"
               },
               {
                 "type": "null"
@@ -4771,7 +3526,7 @@
         ],
         "title": "Message"
       },
-      "data__v1_schemas__MessagePost": {
+      "data__internal_schemas__MessagePost": {
         "properties": {
           "reply": {
             "type": "boolean",
@@ -4797,7 +3552,7 @@
           "sender": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/data__v1_schemas__MessageSender"
+                "$ref": "#/components/schemas/data__internal_schemas__MessageSender"
               },
               {
                 "type": "null"
@@ -4808,7 +3563,7 @@
             "anyOf": [
               {
                 "items": {
-                  "$ref": "#/components/schemas/data__v1_schemas__MessageRecipient"
+                  "$ref": "#/components/schemas/data__internal_schemas__MessageRecipient"
                 },
                 "type": "array"
               },
@@ -4821,7 +3576,7 @@
           "replier": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/data__v1_schemas__MessageReplier"
+                "$ref": "#/components/schemas/data__internal_schemas__MessageReplier"
               },
               {
                 "type": "null"
@@ -4869,7 +3624,7 @@
         ],
         "title": "MessagePost"
       },
-      "data__v1_schemas__MessageRecipient": {
+      "data__internal_schemas__MessageRecipient": {
         "properties": {
           "name": {
             "anyOf": [
@@ -4908,7 +3663,7 @@
         "type": "object",
         "title": "MessageRecipient"
       },
-      "data__v1_schemas__MessageReplier": {
+      "data__internal_schemas__MessageReplier": {
         "properties": {
           "name": {
             "anyOf": [
@@ -4947,7 +3702,7 @@
         "type": "object",
         "title": "MessageReplier"
       },
-      "data__v1_schemas__MessageSender": {
+      "data__internal_schemas__MessageSender": {
         "properties": {
           "room_id": {
             "anyOf": [
@@ -5008,7 +3763,7 @@
         "type": "object",
         "title": "MessageSender"
       },
-      "data__v1_schemas__Participant": {
+      "data__internal_schemas__Participant": {
         "properties": {
           "id": {
             "type": "string",
@@ -5095,7 +3850,7 @@
             "anyOf": [
               {
                 "items": {
-                  "$ref": "#/components/schemas/data__v1_schemas__BotAction"
+                  "$ref": "#/components/schemas/data__internal_schemas__BotAction"
                 },
                 "type": "array"
               },
@@ -5134,7 +3889,7 @@
         ],
         "title": "Participant"
       },
-      "data__v1_schemas__Room": {
+      "data__internal_schemas__Room": {
         "properties": {
           "id": {
             "type": "string",
@@ -5142,7 +3897,7 @@
           },
           "participants": {
             "items": {
-              "$ref": "#/components/schemas/data__v1_schemas__Participant"
+              "$ref": "#/components/schemas/data__internal_schemas__Participant"
             },
             "type": "array",
             "title": "Participants"
@@ -5183,7 +3938,7 @@
           "last_message": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/data__v1_schemas__Message"
+                "$ref": "#/components/schemas/data__internal_schemas__Message"
               },
               {
                 "type": "null"
@@ -5228,6 +3983,422 @@
           "created_at"
         ],
         "title": "Room"
+      },
+      "data__internal_schemas__RoomCreate": {
+        "properties": {
+          "bot_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Bot Ids"
+          },
+          "client_user_ids": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client User Ids"
+          },
+          "description": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Description"
+          }
+        },
+        "type": "object",
+        "required": [
+          "bot_ids"
+        ],
+        "title": "RoomCreate"
+      },
+      "data__v1_schemas__Message": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "parent_message_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Message Id"
+          },
+          "internal": {
+            "type": "boolean",
+            "title": "Internal"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/data__v1_schemas__MessageSender"
+          },
+          "recipients": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/data__v1_schemas__MessageRecipient"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recipients"
+          },
+          "replier": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/data__v1_schemas__MessageReplier"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "room_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Room Id"
+          },
+          "actions": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Actions"
+          },
+          "contents": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "object"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Contents"
+          },
+          "token_usage": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TokenUsage"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at",
+          "internal",
+          "sender",
+          "actions",
+          "contents"
+        ],
+        "title": "Message"
+      },
+      "data__v1_schemas__MessagePost": {
+        "properties": {
+          "reply": {
+            "type": "boolean",
+            "title": "Reply",
+            "default": true
+          },
+          "parent_message_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Parent Message Id"
+          },
+          "language": {
+            "type": "string",
+            "title": "Language",
+            "default": "en-us"
+          },
+          "sender": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/data__v1_schemas__MessageSender"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "recipients": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/data__v1_schemas__MessageRecipient"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Recipients"
+          },
+          "replier": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/data__v1_schemas__MessageReplier"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "contents": {
+            "items": {
+              "type": "object"
+            },
+            "type": "array",
+            "title": "Contents"
+          },
+          "streaming": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Streaming"
+          },
+          "streaming_delta": {
+            "type": "boolean",
+            "title": "Streaming Delta",
+            "default": true
+          }
+        },
+        "type": "object",
+        "required": [
+          "contents"
+        ],
+        "title": "MessagePost"
+      },
+      "data__v1_schemas__MessageRecipient": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "character_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Character Id"
+          },
+          "room_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Room Id"
+          }
+        },
+        "type": "object",
+        "title": "MessageRecipient"
+      },
+      "data__v1_schemas__MessageReplier": {
+        "properties": {
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          },
+          "character_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Character Id"
+          },
+          "room_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Room Id"
+          }
+        },
+        "type": "object",
+        "title": "MessageReplier"
+      },
+      "data__v1_schemas__MessageSender": {
+        "properties": {
+          "room_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Room Id"
+          },
+          "user_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "User Id"
+          },
+          "client_user_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Client User Id"
+          },
+          "character_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Character Id"
+          },
+          "name": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Name"
+          }
+        },
+        "type": "object",
+        "title": "MessageSender"
+      },
+      "data__v1_schemas__Room": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "created_at"
+        ],
+        "title": "Room"
+      },
+      "data__v1_schemas__RoomCreate": {
+        "properties": {
+          "character_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Character Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "character_ids"
+        ],
+        "title": "RoomCreate"
       },
       "data__v1_schemas_raw__BotAction": {
         "properties": {
@@ -5388,6 +4559,73 @@
           "items": {
             "items": {
               "$ref": "#/components/schemas/data__v1_schemas__Message"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "total": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Total"
+          },
+          "page": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Page"
+          },
+          "size": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 1.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Size"
+          },
+          "pages": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pages"
+          }
+        },
+        "type": "object",
+        "required": [
+          "items",
+          "total",
+          "page",
+          "size"
+        ],
+        "title": "Page[Message]"
+      },
+      "fastapi_pagination__default__Page_Message___3": {
+        "properties": {
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/data__internal_schemas__Message"
             },
             "type": "array",
             "title": "Items"
