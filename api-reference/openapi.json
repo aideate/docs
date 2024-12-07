@@ -664,6 +664,68 @@
         ],
         "title": "AllActionsEvalJobResult"
       },
+      "Audio": {
+        "properties": {
+          "audio_bytes": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Audio Bytes"
+          },
+          "signature": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Signature"
+          },
+          "transcription": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Transcription"
+          },
+          "url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          }
+        },
+        "type": "object",
+        "title": "Audio"
+      },
+      "AudioMessage": {
+        "properties": {
+          "message": {
+            "$ref": "#/components/schemas/Audio"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "AudioMessage"
+      },
       "AudioResponse": {
         "properties": {
           "signature": {
@@ -2218,6 +2280,28 @@
         ],
         "title": "PartnerMemberInvite"
       },
+      "StreamingStatus": {
+        "type": "string",
+        "enum": [
+          "PROCESSING",
+          "DONE",
+          "FAILED"
+        ],
+        "title": "StreamingStatus"
+      },
+      "SystemInputMessage": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "SystemInputMessage"
+      },
       "TextLabelCreate": {
         "properties": {
           "content_index": {
@@ -2235,6 +2319,19 @@
           "correct"
         ],
         "title": "TextLabelCreate"
+      },
+      "TextMessage": {
+        "properties": {
+          "message": {
+            "type": "string",
+            "title": "Message"
+          }
+        },
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "title": "TextMessage"
       },
       "TokenUsage": {
         "properties": {
@@ -4025,6 +4122,34 @@
         ],
         "title": "RoomCreate"
       },
+      "data__v1_schemas__Action": {
+        "properties": {
+          "id": {
+            "type": "string",
+            "title": "Id"
+          },
+          "name": {
+            "type": "string",
+            "title": "Name"
+          },
+          "prompt": {
+            "type": "string",
+            "title": "Prompt"
+          },
+          "triggered": {
+            "type": "boolean",
+            "title": "Triggered"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "prompt",
+          "triggered"
+        ],
+        "title": "Action"
+      },
       "data__v1_schemas__Message": {
         "properties": {
           "id": {
@@ -4046,10 +4171,6 @@
               }
             ],
             "title": "Parent Message Id"
-          },
-          "internal": {
-            "type": "boolean",
-            "title": "Internal"
           },
           "sender": {
             "$ref": "#/components/schemas/data__v1_schemas__MessageSender"
@@ -4093,7 +4214,7 @@
             "anyOf": [
               {
                 "items": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/data__v1_schemas__Action"
                 },
                 "type": "array"
               },
@@ -4107,7 +4228,7 @@
             "anyOf": [
               {
                 "items": {
-                  "type": "object"
+                  "$ref": "#/components/schemas/data__v1_schemas__MessageContent"
                 },
                 "type": "array"
               },
@@ -4138,6 +4259,52 @@
           "contents"
         ],
         "title": "Message"
+      },
+      "data__v1_schemas__MessageContent": {
+        "properties": {
+          "streaming_status": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/StreamingStatus"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "audio": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/AudioMessage"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "system_input": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/SystemInputMessage"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "text": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/TextMessage"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "title": "MessageContent"
       },
       "data__v1_schemas__MessagePost": {
         "properties": {
