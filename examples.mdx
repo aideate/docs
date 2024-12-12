@@ -35,9 +35,12 @@ def create_room(
 
 ## Sending Messages
 
-Send a message to a room with optional streaming and voice support:
+Send a message to a room with optional streaming and voice support. The example demonstrates how to handle streamed responses and decode them into JSON objects:
 
 ```python
+import json
+from typing import Optional, List, Iterator, Dict, Any
+
 def send_chat_message(
     room_id: str,
     input_message: str,
@@ -47,7 +50,7 @@ def send_chat_message(
     voice: bool = False,
     recipients: Optional[List[str]] = None,
     replier: Optional[str] = None,
-):
+) -> Iterator[Dict[str, Any]]:
     data = {
         "reply": True,
         "system_input_message": False,
@@ -73,15 +76,61 @@ def send_chat_message(
         "voice": voice,
         "streaming": streaming
     }
+
     response = requests.post(
         url=f"https://api.genova.gg/v1/rooms/{room_id}/messages",
         headers={"Content-Type": "application/json", "x-api-key": API_KEY},
         json=data,
         stream=True
     )
-    events = []
+
+    # Handle the streamed response
+    buffer = ""
     for chunk in response.iter_content(chunk_size=2048):
         if chunk:
-            events.append(chunk.decode('utf-8'))
-    return events
+            buffer += chunk.decode('utf-8')
+
+            # Process complete JSON objects from the buffer
+            while '\n' in buffer:
+                line, buffer = buffer.split('\n', 1)
+                if line.strip():  # Skip empty lines
+                    try:
+                        message = json.loads(line)
+                        yield message
+                    except json.JSONDecodeError:
+                        print(f"Warning: Failed to decode JSON: {line}")
+                        continue
+
+    # Process any remaining data in the buffer
+    if buffer.strip():
+        try:
+            message = json.loads(buffer)
+            yield message
+        except json.JSONDecodeError:
+            print(f"Warning: Failed to decode JSON: {buffer}")
+
+# Example usage:
+"""
+# Process streamed messages as they arrive
+for message in send_chat_message(
+    room_id="room_123",
+    input_message="Hello!",
+    client_user_id="user_123",
+    client_user_name="John",
+    streaming=True
+):
+    # Each message is a decoded JSON object
+    print(f"Received message: {message}")
+    # Access specific fields
+    if "text" in message:
+        print(f"Text content: {message['text']}")
+"""
 ```
+
+The example above demonstrates how to:
+1. Send a message to a room
+2. Handle streaming responses
+3. Parse incoming data into JSON objects
+4. Process messages as they arrive
+
+Each yielded message is a decoded JSON object that you can work with directly in your code. The example includes proper error handling for JSON decoding and demonstrates how to handle partial messages in the stream.
