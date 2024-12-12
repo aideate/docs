@@ -55,6 +55,13 @@
         "group-chat-guide",
         "api-deepdive"
       ]
+    },
+    {
+      "group": "API Reference",
+      "pages": [
+        "api-reference/endpoint/rooms/create",
+        "api-reference/endpoint/rooms/messages"
+      ]
     }
   ],
   "footerSocials": {
