@@ -57,10 +57,9 @@
       ]
     },
     {
-      "group": "API Reference",
+      "group": "Examples",
       "pages": [
-        "api-reference/endpoint/rooms/create",
-        "api-reference/endpoint/rooms/messages"
+        "examples"
       ]
     }
   ],

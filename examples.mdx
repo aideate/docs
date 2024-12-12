@@ -1,0 +1,87 @@
+---
+title: 'API Examples'
+description: 'Example code snippets for common API operations'
+---
+
+# Python Examples
+
+## Room Creation
+
+Create a new room with specified character IDs:
+
+```python
+import requests
+from typing import Optional, List
+
+# Replace with your API key
+API_KEY = "your_api_key"
+
+def create_room(
+    character_ids: List[str],
+    session: requests.sessions.Session
+):
+    response = session.post(
+        url="https://api.genova.gg/v1/rooms",
+        headers={"Content-Type": "application/json", "x-api-key": API_KEY},
+        json={
+            "character_ids": character_ids,
+        },
+    )
+    if response.status_code == 200:
+        response = response.json()
+        return response["id"]
+    return None
+```
+
+## Sending Messages
+
+Send a message to a room with optional streaming and voice support:
+
+```python
+def send_chat_message(
+    room_id: str,
+    input_message: str,
+    client_user_id: str,
+    client_user_name: str,
+    streaming: bool = False,
+    voice: bool = False,
+    recipients: Optional[List[str]] = None,
+    replier: Optional[str] = None,
+):
+    data = {
+        "reply": True,
+        "system_input_message": False,
+        "sender": {
+            "client_user_id": client_user_id,
+            "name": client_user_name
+        },
+        "recipients": [
+            {
+                "character_id": character_id
+            } for character_id in recipients
+        ] if recipients else None,
+        "replier": {
+            "character_id": replier
+        } if replier else None,
+        "contents": [
+            {
+                "text": {
+                    "message": input_message
+                }
+            }
+        ],
+        "voice": voice,
+        "streaming": streaming
+    }
+    response = requests.post(
+        url=f"https://api.genova.gg/v1/rooms/{room_id}/messages",
+        headers={"Content-Type": "application/json", "x-api-key": API_KEY},
+        json=data,
+        stream=True
+    )
+    events = []
+    for chunk in response.iter_content(chunk_size=2048):
+        if chunk:
+            events.append(chunk.decode('utf-8'))
+    return events
+```
